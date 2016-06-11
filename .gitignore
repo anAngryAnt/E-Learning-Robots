@@ -1,0 +1,7 @@
+/vendor
+.env
+/database
+/tests
+/server.php
+/.idea
+/LICENSE
