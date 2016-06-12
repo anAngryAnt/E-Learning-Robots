@@ -144,15 +144,16 @@ class Utils
                 }
             }
 
-            if (preg_match('/^detail.jsp?/', $e->href)) {
-                $href = $e->href;
+            $href = $e->href;
+
+            if (preg_match('/^detail.jsp?/', $href)) {
                 $time_pair = $this->accessDeatil($href);
-                $paramter_str = last(explode('?', $href));
-                $paramters = explode('&', $paramter_str);
-                $chooseid = last(explode('=', $paramters[0]));
-                $couid = last(explode('=', $paramters[1]));
+                $parameters = Utils::seprateGetParamter($href);
+                $chooseid = $parameters['chooseid'];
+                $couid = $parameters['couid'];
+                $newUrl = 'detail.jsp?chooseid='.$chooseid.'couid='.$couid;
                 $inner = array(
-                    'href' => $href,
+                    'href' => $newUrl,
                     'couid' => $couid,
                     'chooseid' => $chooseid
                 );

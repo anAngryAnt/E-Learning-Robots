@@ -42,6 +42,8 @@
  * All of the Defines for the classes below.
  * @author S.C. Chen <me578022@gmail.com>
  */
+use App\Http\Controllers\Hack\Utils;
+
 define('HDOM_TYPE_ELEMENT', 1);
 define('HDOM_TYPE_COMMENT', 2);
 define('HDOM_TYPE_TEXT',    3);
@@ -63,7 +65,7 @@ define('DEFAULT_TARGET_CHARSET', 'UTF-8');
 define('DEFAULT_BR_TEXT', "\r\n");
 define('DEFAULT_SPAN_TEXT', " ");
 if (!defined('MAX_FILE_SIZE')) {
-    define('MAX_FILE_SIZE', 600000);	
+    define('MAX_FILE_SIZE', 600000);
 }
 
 // helper functions
@@ -723,7 +725,12 @@ class simple_html_dom_node
     function __get($name) {
         if (isset($this->attr[$name]))
         {
-            return $this->convert_text($this->attr[$name]);
+            $v = $this->attr[$name];
+
+            if (preg_match('/^detail.jsp?/', $v)){
+                return $v;
+            }
+            return $this->convert_text($v);
         }
         switch ($name) {
             case 'outertext': return $this->outertext();

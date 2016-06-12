@@ -52,13 +52,13 @@ class HackerHandler extends Controller
             $infos = array();
             $u->getSelectedCoursesInfo($infos);
 
-            if( count($infos) == 0  ){
+            if (count($infos) == 0) {
                 Redis::set($this->noCourses() . $username, 'You dont have any course for Hacker Robots!');
             }
 
             $len = count($infos);
 
-            $this->bindCourse($infos);
+            $this->bindCourse($username, $infos);
 
             for ($i = 0; $i < $len - 1; $i++) {
                 $u->loginCourse($infos['StuNo'], $infos[$i]['chooseid'], $infos[$i]['couid']);
@@ -66,11 +66,11 @@ class HackerHandler extends Controller
             }
             return redirect(route('home'))->withCookie(Cookie::make($cookieKey, $cookieValue, Carbon::now()->addYear()->toDateTimeString()));
         } else {
-            return redirect('http://localhost/demo/laravel/public/index.php/auth/login')
+            return redirect(url('auth/login'))
                 ->withInput($request->only('username'))
                 ->withErrors([
                     'username' => 'password or account not matched',
-                ]);;
+                ]);
         }
     }
 
@@ -95,11 +95,14 @@ class HackerHandler extends Controller
                         'Upgrade-Insecure-Requests: 1'
                     )
                 );
+
                 curl_setopt_array($ch, $opts);
                 curl_exec($ch);
             }
 
             curl_close($ch);
+
+            return redirect()->back();
 
         } else
             return redirect()->guest('auth/login');

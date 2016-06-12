@@ -37,14 +37,18 @@ class AutoRefresh extends Command implements SelfHandling
         $this->leftHour = $courseInfo['hour'];
         $this->leftMins = $courseInfo['min'];
 
-        $this->deadLine = Carbon::now()->addHours($this->leftHour)->addMinutes($this->leftMins)->timestamp;
-
+        if (!empty($this->leftMins) || !empty($this->leftHour)) {
+            $this->deadLine = Carbon::now()->addHours($this->leftHour)->addMinutes($this->leftMins)->timestamp;
+        }
 
     }
 
 
     public function handle()
     {
+
+        if( empty($this->deadLine) ) return ;
+
         $couseId = isset($this->courseInfo['couid']) ? $this->courseInfo['couid'] : $this->courseInfo['courseid'];
         $chooseId = $this->courseInfo['chooseid'];
 
@@ -73,7 +77,7 @@ class AutoRefresh extends Command implements SelfHandling
         else
             $this->play_url = Utils::PLAYER_ROOT . "refresh.jsp?timestamp=$this->play_timestamp&stuno=$stuno&chooseid=$chooseid&courseid=$courseid";
 
-        echo '  1 play_url is ' . $this->play_url;
+        echo 'choose id is '.$chooseid;
 
         $opts = array(
             CURLOPT_RETURNTRANSFER => true,
@@ -84,8 +88,6 @@ class AutoRefresh extends Command implements SelfHandling
 
         list($this->play_url, $timeGap) = $this->getContent($opts, 0);
 
-        echo '  2 play_url is ' . $this->play_url;
-
         $this->play_timestamp = Utils::seprateGetParamter($this->play_url)['timestamp'];
 
         return $timeGap;
@@ -94,8 +96,6 @@ class AutoRefresh extends Command implements SelfHandling
     private function resetSession($chooseid)
     {
         $this->session_url = Utils::URL_ROOT . "freshsession.jsp?timestamp=$this->session_timestamp&chooseid=$chooseid";
-
-        echo '  session_url is ' . $this->session_url;
 
         $opts = array(
             CURLOPT_RETURNTRANSFER => true,

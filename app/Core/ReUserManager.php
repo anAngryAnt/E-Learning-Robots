@@ -42,30 +42,27 @@ trait ReUserManager
     protected function verifiedUser()
     {
 
-        $username = Redis::hget( $this->request->cookie($this->cookieName()) , 'username');
+        $username = Redis::hget($this->request->cookie($this->cookieName()), 'username');
 
         return is_null($username) ? false : $username;
     }
 
-    protected function bindCourse($courses)
+    protected function bindCourse($username, $courses)
     {
-        if ($token = $this->verifiedUser()) {
-            $len = count($courses) - 1;
-            for ($i = 0; $i < $len; $i++) {
-                Redis::lpush($token, $courses[$i]['chooseid']);
-            }
+        $len = count($courses) - 1;
+        for ($i = 0; $i < $len; $i++)
+            Redis::lpush($username, $courses[$i]['chooseid']);
 
-        }
     }
 
-    protected function logout(){
-
+    protected function logout()
+    {
 
 
         $cookieKey = Cookie::get($this->cookieName());
-        $username = Redis::hget($cookieKey,'username');
+        $username = Redis::hget($cookieKey, 'username');
 
-        Redis::del($this->noCourses().$username);
+        Redis::del($this->noCourses() . $username);
         Redis::del($username);
         Redis::del($cookieKey);
     }
@@ -82,7 +79,8 @@ trait ReUserManager
         return 'h_k';
     }
 
-    protected function noCourses(){
+    protected function noCourses()
+    {
         return 'no_course_msg_';
     }
 
