@@ -10,13 +10,13 @@
                     <div class="panel-body">
 
                         <?php
-                            $username = \App\Http\Controllers\Hack\AuthManager::check();
-                            $message = \Illuminate\Support\Facades\Redis::get('no_course_msg_'.$username);
+                        $username = \App\Http\Controllers\Hack\AuthManager::check();
+                        $message = \Illuminate\Support\Facades\Redis::get('no_course_msg_' . $username);
                         ?>
 
                         @if( empty($message ))
-                            Hacker Robots are working so hard for you ...
-                            <a href="{{route('refresh')}}">Submit</a>
+                            Hacker Robots are working so hard for you ...<br>
+                            如果你希望Robots的工作生效，请点击<a href="{{route('refresh')}}">Submit</a>
                         @else
                             {{$message}} <br>
                             <a href="http://e-learning.neusoft.edu.cn/nou/sel_course/studentselcourse.jsp"> Click here

@@ -77,8 +77,6 @@ class AutoRefresh extends Command implements SelfHandling
         else
             $this->play_url = Utils::PLAYER_ROOT . "refresh.jsp?timestamp=$this->play_timestamp&stuno=$stuno&chooseid=$chooseid&courseid=$courseid";
 
-        echo 'choose id is '.$chooseid;
-
         $opts = array(
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HEADER => true,
