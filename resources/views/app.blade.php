@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+
+<!-- 
+	https://github.com/anAngryAnt/E-Learning-Robots
+	哟~~你好像很感兴趣嘛！一起加入来完善吧~
+-->
+
 <?php use App\Http\Controllers\Hack\AuthManager; ?>
 <html lang="en">
 <head>
@@ -58,5 +64,6 @@
         <!-- Scripts -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="{{ URL::asset('/') }}js/back.js"></script>
 </body>
 </html>

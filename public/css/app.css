@@ -882,7 +882,7 @@ body {
   font-family: "Roboto", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
-  color: #333333;
+  color: #000000;
   background-color: #ffffff;
 }
 input,
@@ -5000,7 +5000,8 @@ a.list-group-item-danger.active:focus {
   color: inherit;
 }
 .panel-title > a {
-  color: inherit;
+  color: #000000;
+  
 }
 .panel-footer {
   padding: 10px 15px;
@@ -6231,3 +6232,8 @@ label,
 .checkbox label {
   font-weight: 300;
 }
+
+body{
+color:#000000;
+}
+
