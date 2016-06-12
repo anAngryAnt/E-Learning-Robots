@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-
 <!-- 
 	https://github.com/anAngryAnt/E-Learning-Robots
 	哟~~你好像很感兴趣嘛！一起加入来完善吧~
 -->
-
 <?php use App\Http\Controllers\Hack\AuthManager; ?>
 <html lang="en">
 <head>
