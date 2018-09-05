@@ -1,6 +1,6 @@
 ## Introduction
 
-这是一个大连东软信息学院内自动挂E-Learning学时的Robot，鉴于学校的强制性E-Learning学分毕业制，anAngryAnt就花了一些时间把这个Robot编写了出来，大家可以参与进来一起完善。
+这是一个大学学院内自动挂E-Learning学时的Robot，鉴于学校的强制性E-Learning学分毕业制，anAngryAnt就花了一些时间把这个Robot编写了出来，大家可以参与进来一起完善。
 
 ## Contract（条款）
 
